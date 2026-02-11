@@ -1,3 +1,23 @@
+# ===========================================================================
+# (c) Copyright IBM Corp. 2026, 2026 All Rights Reserved
+# ===========================================================================
+# This code is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 only, as
+# published by the Free Software Foundation.
+#
+# IBM designates this particular file as subject to the "Classpath" exception
+# as provided by IBM in the LICENSE file that accompanied this code.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# version 2 for more details (a copy is included in the LICENSE file that
+# accompanied this code).
+#
+# You should have received a copy of the GNU General Public License version
+# 2 along with this work; if not, see <http://www.gnu.org/licenses/>.
+# ===========================================================================
+
 ################################################################################
 # Initial bootstrapping
 ################################################################################
@@ -79,6 +99,15 @@ else ifeq ($(UNAME_M),arm64)
 else ifeq ($(UNAME_M),aarch64)
   DEVKIT_VS_CPU_VAR_NAME := aarch64
   PLATFORM_CPU := aarch64
+else ifeq ($(UNAME_M),s390x)
+  DEVKIT_VS_CPU_VAR_NAME := s390x
+  PLATFORM_CPU := s390x
+else ifeq ($(UNAME_M),ppc64le)
+  DEVKIT_VS_CPU_VAR_NAME := ppc64le
+  PLATFORM_CPU := ppc64le
+else ifeq ($(shell uname -p),powerpc)
+  DEVKIT_VS_CPU_VAR_NAME := ppc64
+  PLATFORM_CPU := ppc64
 else
   $(error "Unknown CPU: $(UNAME_M)")
 endif
@@ -92,6 +121,8 @@ else
   UNAME_S := $(shell uname -s)
   ifeq ($(UNAME_S), Darwin)
     PLATFORM_OS := macosx
+  else ifeq ($(UNAME_S), AIX)
+    PLATFORM_OS := aix
   else
     ifeq ($(UNAME_S), Linux)
       PLATFORM_OS := linux

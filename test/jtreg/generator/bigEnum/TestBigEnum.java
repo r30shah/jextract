@@ -20,6 +20,12 @@
  * questions.
  */
 
+/*
+ * ===========================================================================
+ * (c) Copyright IBM Corp. 2026, 2026 All Rights Reserved
+ * ===========================================================================
+ */
+
 import org.testng.annotations.Test;
 import test.jextract.bigenum.*;
 
@@ -30,7 +36,7 @@ import static org.testng.Assert.*;
 
 /*
  * @test
- * @requires (os.arch == "amd64" | os.arch == "x86_64") & os.family == "linux"
+ * @requires (os.arch == "aarch64" | os.arch == "amd64" | os.arch == "ppc64le" | os.arch == "s390x" | os.arch == "x86_64") & os.family == "linux"
  * @library /lib
  * @build testlib.TestUtils
  * @run main/othervm JtregJextract -t test.jextract.bigenum bigEnum.h

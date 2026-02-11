@@ -1,3 +1,23 @@
+# ===========================================================================
+# (c) Copyright IBM Corp. 2026, 2026 All Rights Reserved
+# ===========================================================================
+# This code is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 only, as
+# published by the Free Software Foundation.
+#
+# IBM designates this particular file as subject to the "Classpath" exception
+# as provided by IBM in the LICENSE file that accompanied this code.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# version 2 for more details (a copy is included in the LICENSE file that
+# accompanied this code).
+#
+# You should have received a copy of the GNU General Public License version
+# 2 along with this work; if not, see <http://www.gnu.org/licenses/>.
+# ===========================================================================
+
 include make/Common.gmk
 
 $(eval $(call SetupVariable,PANAMA_JAVA_HOME))
@@ -20,6 +40,7 @@ endif
 
 LIBCLANG_LIB_DIR := $(LIBCLANG_HOME)/$(OS_LIB_DIR)
 LIBCLANG_INCLUDE_DIR := $(LIBCLANG_HOME)/lib/clang/$(LIBCLANG_VERSION)/include
+LIBCLANG_MAJOR_VERSION := $(firstword $(subst ., ,$(LIBCLANG_VERSION)))
 
 BUILD_CLASSES_DIR := $(BUILD_DIR)/classes
 BUILD_MODULES_DIR := $(BUILD_DIR)/jmods
@@ -70,6 +91,9 @@ $(BUILD_MODULES_DIR): $(BUILD_CLASSES_DIR)
 	$(CP) "$(LIBCLANG_INCLUDE_DIR)/"*.h "$(JEXTRACT_JMOD_CONF_DIR)/jextract/"
 	[ ! -f $(JEXTRACT_JMOD_LIBS_DIR)/libclang.so.$(LIBCLANG_VERSION) ] || \
 	  $(MV) "$(JEXTRACT_JMOD_LIBS_DIR)/libclang.so.$(LIBCLANG_VERSION)" "$(JEXTRACT_JMOD_LIBS_DIR)/libclang.so"
+  ifeq ($(PLATFORM_OS), aix)
+	$(ECHO) "$(LIBCLANG_MAJOR_VERSION)" > "$(JEXTRACT_JMOD_CONF_DIR)/jextract/libclang.version"
+  endif
 
 	# create jextract jmod file
 	$(FIXPATH) $(PANAMA_JAVA_HOME)/bin/jmod \
