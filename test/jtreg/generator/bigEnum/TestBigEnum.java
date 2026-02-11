@@ -30,7 +30,7 @@ import static org.testng.Assert.*;
 
 /*
  * @test
- * @requires (os.arch == "amd64" | os.arch == "x86_64") & os.family == "linux"
+ * @requires (os.arch == "amd64" | os.arch == "x86_64" | os.arch == "s390x" | os.arch == "ppc64le" | os.arch == "aarch64" ) & os.family == "linux"
  * @library /lib
  * @build testlib.TestUtils
  * @run main/othervm JtregJextract -t test.jextract.bigenum bigEnum.h
