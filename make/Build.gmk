@@ -20,6 +20,7 @@ endif
 
 LIBCLANG_LIB_DIR := $(LIBCLANG_HOME)/$(OS_LIB_DIR)
 LIBCLANG_INCLUDE_DIR := $(LIBCLANG_HOME)/lib/clang/$(LIBCLANG_VERSION)/include
+LIBCLANG_MAJOR_VERSION := $(firstword $(subst ., ,$(LIBCLANG_VERSION)))
 
 BUILD_CLASSES_DIR := $(BUILD_DIR)/classes
 BUILD_MODULES_DIR := $(BUILD_DIR)/jmods
@@ -59,6 +60,7 @@ else
   LIBCLANG_COPY_PATH := "*clang.*"
 endif
 
+
 $(BUILD_MODULES_DIR): $(BUILD_CLASSES_DIR)
 	$(MKDIR) -p $(BUILD_MODULES_DIR)
 	$(MKDIR) -p $(JEXTRACT_JMOD_LIBS_DIR)
@@ -70,6 +72,10 @@ $(BUILD_MODULES_DIR): $(BUILD_CLASSES_DIR)
 	$(CP) "$(LIBCLANG_INCLUDE_DIR)/"*.h "$(JEXTRACT_JMOD_CONF_DIR)/jextract/"
 	[ ! -f $(JEXTRACT_JMOD_LIBS_DIR)/libclang.so.$(LIBCLANG_VERSION) ] || \
 	  $(MV) "$(JEXTRACT_JMOD_LIBS_DIR)/libclang.so.$(LIBCLANG_VERSION)" "$(JEXTRACT_JMOD_LIBS_DIR)/libclang.so"
+
+ifeq ($(PLATFORM_OS), aix)
+	$(ECHO) "$(LIBCLANG_MAJOR_VERSION)" > "$(JEXTRACT_JMOD_CONF_DIR)/jextract/libclang.version"
+endif
 
 	# create jextract jmod file
 	$(FIXPATH) $(PANAMA_JAVA_HOME)/bin/jmod \

@@ -82,9 +82,17 @@ else
 
       CC_NAME := gcc
       LINK_NAME := gcc
+      CFLAGS += -O3
+      LDFLAGS += -O3
       ifneq ($(SYSROOT),)
         CFLAGS += --sysroot=$(SYSROOT)
       endif
+    else ifeq ($(PLATFORM_OS), aix)
+      SHARED_LIB_SUFFIX := .a
+      CC_NAME := xlc
+      LINK_NAME := xlc
+      CFLAGS := -q64 -qhalt=e -qcpluscmt
+      LDFLAGS := -q64 -G -Wl,-bnoentry,-bexpall
     endif
   endif
 
