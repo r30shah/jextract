@@ -65,18 +65,21 @@ public class Parser {
             if (src == null) {
                 return;
             }
-            System.out.println("RAHILDEBUG: "+c.displayName());
+            System.out.println("RAHILDEBUG - entry: "+c.displayName());
 
             if (c.isDeclaration()) {
                 if (c.kind() == CursorKind.UnexposedDecl ||
                         c.kind() == CursorKind.Namespace) {
+                    System.out.println("RAHILDEBUG - Parser:73");
                     c.forEach(t -> {
+                        System.out.println("RAHILDEBUG - Parser:75 "+t.displayName());
                         Declaration declaration = treeMaker.createTree(t);
                         if (declaration != null) {
                             decls.add(declaration);
                         }
                     });
                 } else {
+                    System.out.println("RAHILDEBUG - Parser:82");
                     Declaration decl = treeMaker.createTree(c);
                     if (decl != null) {
                         decls.add(decl);
