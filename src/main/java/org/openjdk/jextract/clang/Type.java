@@ -109,9 +109,12 @@ public final class Type extends ClangDisposable.Owned {
 
     // Struct/RecordType
     private long getOffsetOf0(String fieldName) {
+        System.out.println("RAHILDEBUG - entry in Type.java:112 "+fieldName);
         try (Arena arena = Arena.ofConfined()) {
             MemorySegment cfname = arena.allocateFrom(fieldName);
-            return Index_h.clang_Type_getOffsetOf(segment, cfname);
+            long offset = Index_h.clang_Type_getOffsetOf(segment, cfname);
+            System.out.println("RAHILDEBUG - exit in Type.java:116 offset = "+offset);
+            return offset;
         }
     }
 
