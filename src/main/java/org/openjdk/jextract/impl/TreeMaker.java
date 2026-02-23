@@ -269,6 +269,7 @@ class TreeMaker {
         List<Variable> pendingBitFields = new ArrayList<>();
         AtomicReference<Position> pendingBitfieldsPos = new AtomicReference<>();
         recordCursor.forEach(fc -> {
+            System.out.println("RAHILDEBUG:TreeMaker.java:272 - "+fc.displayName());
             if (Utils.isFlattenable(fc)) {
                 if (fc.isBitField()) {
                     if (pendingBitfieldsPos.get() == null) {
