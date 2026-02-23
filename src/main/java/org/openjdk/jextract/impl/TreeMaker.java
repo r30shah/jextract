@@ -348,7 +348,7 @@ class TreeMaker {
         AtomicReference<OptionalLong> result = new AtomicReference<>(OptionalLong.empty());
         record.forEachShortCircuit(fc -> {
             if (Utils.isFlattenable(fc)) {
-                if (!fc.spelling().isEmpty()) {
+                if (!fc.spelling().isEmpty() && !fc.spelling().matches("struct \\(anonymous.*\\)")) {
                     long offsetToOutermost = outermostParent.type().getOffsetOf(fc.spelling());
                     long offsetToAnon = anonRecord.type().getOffsetOf(fc.spelling());
                     result.set(OptionalLong.of(offsetToOutermost - offsetToAnon));
