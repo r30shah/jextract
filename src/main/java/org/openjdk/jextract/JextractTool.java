@@ -111,6 +111,7 @@ public final class JextractTool {
 
     private static Declaration.Scoped parseInternal(Logger logger, List<String> headers, String... parserOptions) {
         String source = generateTmpSource(headers);
+        System.out.println("RAHILDEBUG-"+source);
         return new Parser(logger)
                 .parse("jextract$tmp.h", source, Stream.of(parserOptions).collect(Collectors.toList()));
     }
