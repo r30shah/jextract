@@ -54,6 +54,7 @@ public class Parser {
     private Declaration.Scoped collectDeclarations(TranslationUnit tu, MacroParserImpl macroParser) {
         List<Declaration> decls = new ArrayList<>();
         Cursor tuCursor = tu.getCursor();
+        System.out.println("RAHILDEBUG: "+tuCursor.displayName());
         tuCursor.forEach(c -> {
             SourceLocation loc = c.getSourceLocation();
             if (loc == null) {
@@ -64,6 +65,7 @@ public class Parser {
             if (src == null) {
                 return;
             }
+            System.out.println("RAHILDEBUG: "+c.displayName());
 
             if (c.isDeclaration()) {
                 if (c.kind() == CursorKind.UnexposedDecl ||
