@@ -70,7 +70,9 @@ public class TranslationUnit extends ClangDisposable {
         int cntDiags = Index_h.clang_getNumDiagnostics(ptr);
         for (int i = 0; i < cntDiags; i++) {
             MemorySegment diag = Index_h.clang_getDiagnostic(ptr, i);
-            dh.accept(new Diagnostic(diag));
+            Diagnostic diagObj = new Diagnostic(diag);
+            System.out.println("RAHILDEBUG "+diagObj.toString());
+            dh.accept(diagObj);
         }
     }
 
