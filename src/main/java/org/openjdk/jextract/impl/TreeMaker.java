@@ -311,7 +311,7 @@ class TreeMaker {
             pendingBitfieldsPos.set(null);
         }
 
-        System.out.println("RAHILDEBUG: TreeMaker.java:314 - Walked through all members of Struct/Union for "+recordCursor.displayName()+" spelling ="+fc.spelling());
+        System.out.println("RAHILDEBUG: TreeMaker.java:314 - Walked through all members of Struct/Union for "+recordCursor.displayName()+" spelling ="+recordCursor.spelling());
         Scoped structOrUnionDecl = recordCursor.kind() == CursorKind.StructDecl ?
                 Declaration.struct(CursorPosition.of(recordCursor), recordCursor.spelling(),
                         pendingFields.toArray(new Declaration[0])) :
