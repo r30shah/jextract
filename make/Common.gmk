@@ -147,9 +147,9 @@ CHMOD := chmod
 TAR := tar
 PRINTF := printf
 
-BUILD_VERSION ?= internal
+BUILD_VERSION ?= 25.0.2.1
 
-JEXTRACT_NAME := jextract
+JEXTRACT_NAME := ibm-semeru-jextract
 JEXTRACT_NAME_VERSION := $(JEXTRACT_NAME)-$(BUILD_VERSION)
 
 CONF_NAME ?= $(PLATFORM)
