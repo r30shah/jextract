@@ -132,7 +132,11 @@ else
   endif
 endif
 
-PLATFORM := $(PLATFORM_OS)-$(PLATFORM_CPU)
+ifeq ($(PLATFORM_OS), macosx)
+  PLATFORM := $(PLATFORM_CPU)_mac
+else
+  PLATFORM := $(PLATFORM_CPU)_$(PLATFORM_OS)
+endif
 
 ECHO := echo
 TR := tr
@@ -150,7 +154,6 @@ PRINTF := printf
 BUILD_VERSION ?= internal
 
 JEXTRACT_NAME := jextract
-JEXTRACT_NAME_VERSION := $(JEXTRACT_NAME)-$(BUILD_VERSION)
 
 CONF_NAME ?= $(PLATFORM)
 
